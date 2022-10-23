@@ -1,7 +1,8 @@
 import React from "react";
+import LoginScreen from "./LoginScreen";
 
 const HomeScreen = () => {
-  return <div>HomeScreen</div>;
+  return <LoginScreen />;
 };
 
 export default HomeScreen;
