@@ -16,7 +16,7 @@ const LoginScreen = () => {
           />
         </Col>
         <Col md={1} />
-        <Col md={4} className="py-5">
+        <Col md={4} className="py-5 ">
           <Form.Group controlId="email">
             <Form.Label>Email Address</Form.Label>
             <Form.Control
