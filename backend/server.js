@@ -2,12 +2,15 @@ import express from "express";
 import dotenv from "dotenv";
 import { chats } from "./data/data.js";
 import connectDB from "./config/db.js";
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
 
 connectDB();
 const app = express();
+
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("API is running");
@@ -22,6 +25,10 @@ app.get("/api/chat/:id", (req, res) => {
 });
 
 app.use("/api/users", userRoutes);
+
+app.use(notFound);
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
