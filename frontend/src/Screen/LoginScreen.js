@@ -1,7 +1,9 @@
 import { React, useState } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
-import { login } from "../actions/userAction";
+import { useDispatch, useSelector } from "react-redux";
+import { login, register } from "../actions/userAction";
+import Message from "../components/Message";
+import Loader from "../components/Loader";
 
 export const Container = styled.div`
   background-color: #fff;
@@ -163,32 +165,76 @@ export const Paragraph = styled.p`
 `;
 
 const LoginScreen = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState(null);
+
   const [signIn, toggle] = useState(true);
 
   const dispatch = useDispatch();
+  const userRegister = useSelector((state) => state.userRegister);
+  const { error: registerError, userInfo: registerUserInfo } = userRegister;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { error: loginError, userInfo: loginUserInfo } = userLogin;
 
   const loginHandler = (e) => {
     e.preventDefault();
     dispatch(login(email, password));
   };
 
+  const signupHandler = (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      setMessage("Passwords do not match");
+    } else {
+      dispatch(register(name, email, password));
+    }
+  };
+
   return (
     <>
       <Container>
         <SignUpContainer signinIn={signIn}>
-          <Form>
+          {message && <Message variant="danger">{message}</Message>}
+          {registerError && <Message variant="danger">{registerError}</Message>}
+
+          <Form onSubmit={signupHandler}>
             <Title>Create Account</Title>
-            <Input type="text" placeholder="Name" />
-            <Input type="email" placeholder="Email" />
-            <Input type="password" placeholder="Password" />
-            <Input type="password" placeholder="Re-Enter Password" />
+            <Input
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <Input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Input
+              type="password"
+              placeholder="Re-Enter Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
             <Button>Sign Up</Button>
           </Form>
         </SignUpContainer>
 
         <SignInContainer signinIn={signIn}>
+          {message && <Message variant="danger">{message}</Message>}
+          {loginError && <Message variant="danger">{loginError}</Message>}
           <Form onSubmit={loginHandler}>
             <Title>Sign in</Title>
             <Input
