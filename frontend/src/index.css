@@ -1,16 +1,16 @@
-/* #2b6777
-#c8d8e4
-#ffffff
-#f2f2f2
-#52ab98
- */
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
 
-/* .App {
-  min-height: 97vh;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #f6f5f7;
   display: flex;
-  background-color: #f2f2f2;
-  background-position: center;
-  background-size: cover;
-} */
-
-@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap");
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Montserrat", sans-serif;
+  height: 100vh;
+  margin: -20px 0 50px;
+}
