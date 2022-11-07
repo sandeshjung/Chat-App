@@ -1,5 +1,7 @@
 import { React, useState } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { login } from "../actions/userAction";
 
 export const Container = styled.div`
   background-color: #fff;
@@ -164,6 +166,14 @@ const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signIn, toggle] = useState(true);
+
+  const dispatch = useDispatch();
+
+  const loginHandler = (e) => {
+    e.preventDefault();
+    dispatch(login(email, password));
+  };
+
   return (
     <>
       <Container>
@@ -173,15 +183,26 @@ const LoginScreen = () => {
             <Input type="text" placeholder="Name" />
             <Input type="email" placeholder="Email" />
             <Input type="password" placeholder="Password" />
+            <Input type="password" placeholder="Re-Enter Password" />
             <Button>Sign Up</Button>
           </Form>
         </SignUpContainer>
 
         <SignInContainer signinIn={signIn}>
-          <Form>
+          <Form onSubmit={loginHandler}>
             <Title>Sign in</Title>
-            <Input type="email" placeholder="Email" />
-            <Input type="password" placeholder="Password" />
+            <Input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <Anchor href="#">Forgot your password?</Anchor>
             <Button>Sigin In</Button>
           </Form>
@@ -192,15 +213,16 @@ const LoginScreen = () => {
             <LeftOverlayPanel signinIn={signIn}>
               <Title style={{ color: "#fff" }}>Welcome Back!</Title>
               <Paragraph>
-                To keep connected with us please login with your personal info
+                To keep connected with your friends please login with your
+                personal info
               </Paragraph>
               <GhostButton onClick={() => toggle(true)}>Sign In</GhostButton>
             </LeftOverlayPanel>
 
             <RightOverlayPanel signinIn={signIn}>
-              <Title style={{ color: "#fff" }}>Hello, Friend!</Title>
+              <Title style={{ color: "#fff" }}>Hello!</Title>
               <Paragraph>
-                Enter Your personal details and start journey with us
+                Enter Your personal details and start chatting
               </Paragraph>
               <GhostButton onClick={() => toggle(false)}>Sigin Up</GhostButton>
             </RightOverlayPanel>
