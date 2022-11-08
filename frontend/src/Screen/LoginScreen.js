@@ -1,6 +1,7 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { login, register } from "../actions/userAction";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -11,9 +12,9 @@ export const Container = styled.div`
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   position: relative;
   overflow: hidden;
-  width: 678px;
+  width: 690px;
   max-width: 100%;
-  min-height: 400px;
+  min-height: 500px;
 `;
 
 export const SignUpContainer = styled.div`
@@ -174,11 +175,25 @@ const LoginScreen = () => {
   const [signIn, toggle] = useState(true);
 
   const dispatch = useDispatch();
+
   const userRegister = useSelector((state) => state.userRegister);
   const { error: registerError, userInfo: registerUserInfo } = userRegister;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { error: loginError, userInfo: loginUserInfo } = userLogin;
+
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  const redirect = searchParams.get("redirect")
+    ? searchParams.get("redirect")[1]
+    : "/chat";
+
+  useEffect(() => {
+    if (loginUserInfo || registerUserInfo) {
+      navigate(redirect);
+    }
+  }, [navigate, loginUserInfo, registerUserInfo, redirect]);
 
   const loginHandler = (e) => {
     e.preventDefault();
@@ -199,9 +214,6 @@ const LoginScreen = () => {
     <>
       <Container>
         <SignUpContainer signinIn={signIn}>
-          {message && <Message variant="danger">{message}</Message>}
-          {registerError && <Message variant="danger">{registerError}</Message>}
-
           <Form onSubmit={signupHandler}>
             <Title>Create Account</Title>
             <Input
@@ -228,13 +240,16 @@ const LoginScreen = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
+            {message && <Message variant="danger">{message}</Message>}
+            {registerError && (
+              <Message variant="danger">{registerError}</Message>
+            )}
+
             <Button>Sign Up</Button>
           </Form>
         </SignUpContainer>
 
         <SignInContainer signinIn={signIn}>
-          {message && <Message variant="danger">{message}</Message>}
-          {loginError && <Message variant="danger">{loginError}</Message>}
           <Form onSubmit={loginHandler}>
             <Title>Sign in</Title>
             <Input
@@ -249,6 +264,8 @@ const LoginScreen = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            {message && <Message variant="danger">{message}</Message>}
+            {loginError && <Message variant="danger">{loginError}</Message>}
             <Anchor href="#">Forgot your password?</Anchor>
             <Button>Sigin In</Button>
           </Form>
