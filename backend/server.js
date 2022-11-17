@@ -4,6 +4,7 @@ import { chats } from "./data/data.js";
 import connectDB from "./config/db.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import userRoutes from "./routes/userRoutes.js";
+import chatRoutes from "./routes/chatRoutes.js";
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ app.get("/api/chat/:id", (req, res) => {
 });
 
 app.use("/api/users", userRoutes);
+app.use("/api/chat", chatRoutes);
 
 app.use(notFound);
 
