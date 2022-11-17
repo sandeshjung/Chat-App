@@ -1,10 +1,11 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+/* @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800"); */
+@import url(https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap);
 
-* {
+/* * {
   box-sizing: border-box;
-}
+} */
 
-body {
+/* body {
   background: #f6f5f7;
   display: flex;
   justify-content: center;
@@ -13,4 +14,21 @@ body {
   font-family: "Montserrat", sans-serif;
   height: 100vh;
   margin: -20px 0 50px;
+} */
+
+/* body {
+  min-height: 100vh;
+} */
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(136, 136, 136, 0.281);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

@@ -1,0 +1,3 @@
+export const getSender = (userInfo, users) => {
+  return users[0]._id === userInfo._id ? users[1].name : users[0].name;
+};

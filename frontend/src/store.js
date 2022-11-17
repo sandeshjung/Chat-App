@@ -1,11 +1,19 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { userLoginReducer, userRegisterReducer } from "./reducers/userReducers";
+import {
+  userLoginReducer,
+  userRegisterReducer,
+  userSearchReducer,
+} from "./reducers/userReducers";
+import { chatCreateReducer, fetchChatsReducer } from "./reducers/chatReducer";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
+  userSearch: userSearchReducer,
+  chatCreate: chatCreateReducer,
+  fetchChats: fetchChatsReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

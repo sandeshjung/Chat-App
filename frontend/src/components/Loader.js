@@ -1,20 +1,22 @@
 import React from "react";
-import { Spinner } from "react-bootstrap";
+import { Stack, Skeleton } from "@chakra-ui/react";
 
 const Loader = () => {
   return (
-    <Spinner
-      animation="border"
-      role="status"
-      style={{
-        width: "100px",
-        height: "100px",
-        margin: "auto",
-        display: "block",
-      }}
-    >
-      <span className="sr-only">Loading...</span>
-    </Spinner>
+    <Stack>
+      <Skeleton height="45px" />
+      <Skeleton height="45px" />
+      <Skeleton height="45px" />
+      <Skeleton height="45px" />
+      <Skeleton height="45px" />
+      <Skeleton height="45px" />
+      <Skeleton height="45px" />
+      <Skeleton height="45px" />
+      <Skeleton height="45px" />
+      <Skeleton height="45px" />
+      <Skeleton height="45px" />
+      <Skeleton height="45px" />
+    </Stack>
   );
 };
 
