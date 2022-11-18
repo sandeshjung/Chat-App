@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Box } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
 import {
@@ -22,10 +22,10 @@ import { Avatar } from "@chakra-ui/avatar";
 import { useSelector, useDispatch } from "react-redux";
 import ProfileModal from "./ProfileModal";
 import { logout } from "../actions/userAction";
-import { useNavigate } from "react-router-dom";
+
 import { useDisclosure } from "@chakra-ui/hooks";
 import Loader from "./Loader";
-import axios from "axios";
+
 import UserListItem from "./UserListItem";
 import { searchUser } from "../actions/userAction";
 import { createChat } from "../actions/chatAction";
@@ -40,7 +40,7 @@ const SideDrawer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const toast = useToast();
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -117,7 +117,7 @@ const SideDrawer = () => {
       <Box
         display="flex"
         justifyContent="space-between"
-        bg="grey"
+        bg="#075e54"
         w="100%"
         p="5px 10px 5px 10px"
         borderWidth="5px"
@@ -125,13 +125,17 @@ const SideDrawer = () => {
         <Tooltip label="Search users to chat" hasArrow placement="bottom-end">
           <Button variant="ghost" onClick={onOpen}>
             <i className="fas fa-search"></i>
-            <Text display={{ base: "none", md: "flex" }} px="4">
+            <Text
+              display={{ base: "none", md: "flex" }}
+              px="4"
+              textColor="white"
+            >
               Search User
             </Text>
           </Button>
         </Tooltip>
 
-        <Text fonsize="2xl" fontFamily="Work sans">
+        <Text fonsize="2xl" fontFamily="Work sans" textColor="white">
           Talk-A-Tive
         </Text>
         <div>

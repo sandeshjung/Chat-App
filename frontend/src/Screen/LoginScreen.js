@@ -1,10 +1,9 @@
 import { React, useState, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { login, register } from "../actions/userAction";
 import Message from "../components/Message";
-import Loader from "../components/Loader";
 
 export const Container = styled.div`
   background-color: #fff;
@@ -74,8 +73,8 @@ export const Input = styled.input`
 
 export const Button = styled.button`
   border-radius: 20px;
-  border: 1px solid #ff4b2b;
-  background-color: #ff4b2b;
+  border: 1px solid #128c7e;
+  background-color: #075e54;
   color: #ffffff;
   font-size: 12px;
   font-weight: bold;
@@ -115,9 +114,9 @@ export const OverlayContainer = styled.div`
 `;
 
 export const Overlay = styled.div`
-  background: #ff416c;
-  background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
-  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  background: #128c7e;
+  background: -webkit-linear-gradient(to right, #075e54, #128c7e);
+  background: linear-gradient(to right, #075e54, #128c7e);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;

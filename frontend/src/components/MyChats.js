@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useToast } from "@chakra-ui/toast";
 import { getChats, selectChat } from "../actions/chatAction";
-import { Box, Button, Stack, Text } from "@chakra-ui/react";
-import { AddIcon } from "@chakra-ui/icons";
+import { Box, Stack, Text } from "@chakra-ui/react";
 import Loader from "./Loader";
 import { getSender } from "../config/ChatLogics";
 // import GroupChatModal from "./GroupChatModal";
@@ -37,7 +35,7 @@ const MyChats = ({ fetchAgain }) => {
       flexDir="column"
       alignItems="center"
       p={3}
-      bg="grey"
+      bg="#075e54"
       w="31%"
       borderRadius="lg"
       borderWidth="1px"
@@ -51,6 +49,7 @@ const MyChats = ({ fetchAgain }) => {
         w="100%"
         justifyContent="space-between"
         alignItems="center"
+        textColor="white"
       >
         My Chats
         {/* <GroupChatModal>
@@ -79,7 +78,7 @@ const MyChats = ({ fetchAgain }) => {
               <Box
                 onClick={() => handleChat(ch)}
                 cursor="pointer"
-                bg={selectedChat === ch ? "#38B2AC" : "#E8E8E8"}
+                bg={selectedChat === ch ? "#128c7e" : "#ece5dd"}
                 color={selectedChat === ch ? "white" : "black"}
                 px={3}
                 py={2}

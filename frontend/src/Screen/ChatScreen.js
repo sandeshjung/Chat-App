@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box } from "@chakra-ui/layout";
+
 import { useSelector } from "react-redux";
 import ChatBox from "../components/ChatBox";
 import MyChats from "../components/MyChats";

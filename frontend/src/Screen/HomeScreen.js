@@ -7,9 +7,8 @@ const HomeScreen = () => {
   return (
     <>
       <Container className="loginScreen">
-        <LoginScreen />;
+        <LoginScreen />
       </Container>
-      ;
     </>
   );
 };

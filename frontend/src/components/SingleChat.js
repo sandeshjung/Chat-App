@@ -62,9 +62,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         `/api/message/${selectedChat._id}`,
         config
       );
-      console.log(selectedChat);
+      // console.log(selectedChat);
       setMessages(data);
-      console.log(messages);
+      // console.log(messages);
       setLoading(false);
 
       socket.emit("join chat", selectedChat._id);
@@ -179,6 +179,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             display="flex"
             justifyContent={{ base: "space-between" }}
             alignItems="center"
+            // color="white"
           >
             <IconButton
               display={{ base: "flex", md: "none" }}
@@ -188,6 +189,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             {selectedChat && (
               <>
                 {getSender(userInfo, selectedChat.users)}
+
                 <ProfileModal
                   userInfo={getSenderFull(userInfo, selectedChat.users)}
                 />
@@ -256,7 +258,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           justifyContent="center"
           h="100%"
         >
-          <Text fontSize="3xl" pb={3} fontFamily="Work sans">
+          <Text fontSize="3xl" pb={3} fontFamily="Work sans" textColor="white">
             Click on a user to start chatting
           </Text>
         </Box>
