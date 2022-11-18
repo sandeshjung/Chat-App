@@ -6,7 +6,11 @@ import {
   userRegisterReducer,
   userSearchReducer,
 } from "./reducers/userReducers";
-import { chatCreateReducer, fetchChatsReducer } from "./reducers/chatReducer";
+import {
+  chatCreateReducer,
+  fetchChatsReducer,
+  chatSelectedReducer,
+} from "./reducers/chatReducer";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -14,6 +18,7 @@ const reducer = combineReducers({
   userSearch: userSearchReducer,
   chatCreate: chatCreateReducer,
   fetchChats: fetchChatsReducer,
+  chatSelected: chatSelectedReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

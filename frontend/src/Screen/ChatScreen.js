@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Box } from "@chakra-ui/layout";
 import { useSelector } from "react-redux";
 import ChatBox from "../components/ChatBox";
@@ -10,6 +10,7 @@ const ChatScreen = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const [fetchAgain, setFetchAgain] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,8 +33,8 @@ const ChatScreen = () => {
               padding: 10,
             }}
           >
-            <MyChats />
-            <ChatBox />
+            <MyChats fetchAgain={fetchAgain} />
+            <ChatBox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
           </div>
         </div>
       )}

@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useToast } from "@chakra-ui/toast";
-import { getChats } from "../actions/chatAction";
+import { getChats, selectChat } from "../actions/chatAction";
 import { Box, Button, Stack, Text } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import Loader from "./Loader";
 import { getSender } from "../config/ChatLogics";
+// import GroupChatModal from "./GroupChatModal";
 
-const MyChats = () => {
-  const [selectedChat, setSelectedChat] = useState();
+const MyChats = ({ fetchAgain }) => {
+  // const [selectedChat, setSelectedChat] = useState();
 
   const dispatch = useDispatch();
 
@@ -18,15 +19,21 @@ const MyChats = () => {
   const fetchChats = useSelector((state) => state.fetchChats);
   const { chat } = fetchChats;
 
+  const chatSelected = useSelector((state) => state.chatSelected);
+  const { selectedChat } = chatSelected;
+
   // console.log(chat);
+  const handleChat = (ch) => {
+    dispatch(selectChat(ch));
+  };
 
   useEffect(() => {
     dispatch(getChats());
-  }, [dispatch]);
+  }, [dispatch, fetchAgain]);
 
   return (
     <Box
-      display="flex"
+      display={{ base: selectedChat ? "none" : "flex", md: "flex" }}
       flexDir="column"
       alignItems="center"
       p={3}
@@ -46,13 +53,15 @@ const MyChats = () => {
         alignItems="center"
       >
         My Chats
-        <Button
-          display="flex"
-          fontSize={{ base: "17px", md: "10px", lg: "17px" }}
-          rightIcon={<AddIcon />}
-        >
-          New Group Chat
-        </Button>
+        {/* <GroupChatModal>
+          <Button
+            display="flex"
+            fontSize={{ base: "17px", md: "10px", lg: "17px" }}
+            rightIcon={<AddIcon />}
+          >
+            New Group Chat
+          </Button>
+        </GroupChatModal> */}
       </Box>
       <Box
         d="flex"
@@ -68,7 +77,7 @@ const MyChats = () => {
           <Stack overflowY="scroll">
             {chat.map((ch) => (
               <Box
-                onClick={() => setSelectedChat(ch)}
+                onClick={() => handleChat(ch)}
                 cursor="pointer"
                 bg={selectedChat === ch ? "#38B2AC" : "#E8E8E8"}
                 color={selectedChat === ch ? "white" : "black"}

@@ -5,6 +5,10 @@ import {
   FETCH_CHAT_FAIL,
   FETCH_CHAT_REQUEST,
   FETCH_CHAT_SUCCESS,
+  SELECT_CHAT_FAIL,
+  SELECT_CHAT_REQUEST,
+  SELECT_CHAT_RESET,
+  SELECT_CHAT_SUCCESS,
 } from "../constants/chatConstants";
 
 export const chatCreateReducer = (state = {}, action) => {
@@ -45,6 +49,30 @@ export const fetchChatsReducer = (state = {}, action) => {
         loading: false,
         error: action.payload,
       };
+    default:
+      return state;
+  }
+};
+
+export const chatSelectedReducer = (state = {}, action) => {
+  switch (action.type) {
+    case SELECT_CHAT_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case SELECT_CHAT_SUCCESS:
+      return {
+        loading: false,
+        selectedChat: action.payload,
+      };
+    case SELECT_CHAT_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case SELECT_CHAT_RESET:
+      return {};
     default:
       return state;
   }
